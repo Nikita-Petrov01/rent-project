@@ -65,13 +65,13 @@ function App() {
   return (
     <Routes>
       <Route element={<Layout user={user} logoutHandler={logoutHandler} />}>
-        <Route path="/" element={<MainPage user={user} />}/>
+        <Route path="/" element={<CategoryUserPage user={user} />}/>
       <Route path="/categories" element={<CategoryUserPage />}></Route>
         <Route
           path="/"
           element={
             <ProtectedRouter isAllowed={user.status === 'logged'}>
-              <MainPage user={user} />
+              <CategoryUserPage user={user} />
             </ProtectedRouter>
           }
         />

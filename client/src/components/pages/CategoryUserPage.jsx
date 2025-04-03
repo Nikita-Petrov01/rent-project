@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import ItemsCard from '../ui/ItemsCard';
 import axiosInstance from '../../API/axiosInstance';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import Select from '../ui/Select';
 
 export default function CategoryUserPage() {
@@ -10,7 +10,7 @@ export default function CategoryUserPage() {
   const [hotels, setHotels] = useState([]);
   const [filteredHotels, setFilteredHotels] = useState([]);
 //   const { categoryId } = useParams();
-
+const navigate = useNavigate()
   useEffect(() => {
     axiosInstance
       .get('/categories')
@@ -51,6 +51,7 @@ export default function CategoryUserPage() {
           </Col>
         ))}
       </Row>
+      <button onClick={()=>navigate('/map')}>Показать на карте</button>
     </Container>
   );
 }
