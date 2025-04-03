@@ -10,6 +10,7 @@ const addressRouter = require('./routes/addressRouter');
 
 const advertisementRouter = require('./routes/advertisementRouter');
 const categoryRouter = require('./routes/categoryRouter');
+// const likeRouter = require('./routes/likeRouter');
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
@@ -23,6 +24,7 @@ app.use('/api/locations', addressRouter);
 
 app.use('/api/advertisements', advertisementRouter);
 app.use('/api/categories', categoryRouter);
+// app.use('/api/likes', likeRouter);
 
 
 

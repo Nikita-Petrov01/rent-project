@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 export default function ItemsCard({ item }) {
   return (
-    <Card style={{ width: '18rem' }} data-testid={item?.id}>
+    <Card style={{ width: '100%' }} data-testid={item?.id}>
     <Link to={`/categories/card/${item.id}`}>
       {item?.image && (
           <Card.Img
