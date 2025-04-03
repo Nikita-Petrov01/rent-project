@@ -11,6 +11,8 @@ import LoginPage from './components/pages/LoginPage';
 
 import MainPage from './components/pages/MainPage';
 import AdminPageMain from './components/pages/AdminPage/AdminPageMain';
+import CategoryUserPage from './components/pages/CategoryUserPage';
+import OneCardPage from './components/pages/OneCardPage';
 
 function App() {
   const [user, setUser] = useState({ status: 'logging' });
@@ -60,6 +62,16 @@ function App() {
     <Routes>
       <Route element={<Layout user={user} logoutHandler={logoutHandler} />}>
         <Route path="/" element={<MainPage user={user} />}/>
+      <Route path="/categories" element={<CategoryUserPage />}></Route>
+        <Route
+          path="/"
+          element={
+            <ProtectedRouter isAllowed={user.status === 'logged'}>
+              <MainPage user={user} />
+            </ProtectedRouter>
+          }
+        />
+
         <Route
           path="/signup"
           element={
@@ -83,6 +95,8 @@ function App() {
           <AdminPageMain />
           </ProtectedRouter>
           } />
+
+        <Route path='/categories/card/:id' element={<OneCardPage/>}/>
       </Route>
     </Routes>
   );
