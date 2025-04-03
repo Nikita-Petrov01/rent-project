@@ -1,15 +1,8 @@
-import { useLocation, Outlet } from 'react-router-dom';
+import { useLocation, Outlet } from 'react-router';
 import NavBar from '../components/ui/NavBar';
 
 
 export default function Layout({ user, logoutHandler, searchHandler }) {
-  return (
-    <div className='container'>
-        <div className='row'>
-            <div className='col'>
-                <NavBar user={user} logoutHandler={logoutHandler} searchHandler={searchHandler} />
-            </div>
-export default function Layout({ user, logoutHandler }) {
   const location = useLocation();
   const regaPage = ['/signup', '/login'];
   const noFooter = regaPage.includes(location.pathname);
@@ -17,7 +10,7 @@ export default function Layout({ user, logoutHandler }) {
     <div className="container">
       <div className="row">
         <div className="col">
-          <NavBar user={user} logoutHandler={logoutHandler} />
+          <NavBar user={user} logoutHandler={logoutHandler} searchHandler={searchHandler} />
         </div>
       </div>
       <div className="row">

@@ -1,7 +1,28 @@
-// const express = require('express');
-// const likeRouter = express.Router();
-// const { Like } = require('../../db/models');
+const express = require('express');
+const likeRouter = express.Router();
+const { Like } = require('../../db/models');
 
+likeRouter.get('/', async (req, res) => {
+    try {
+        const likes = await Like.findAll();
+        res.status(200).json(likes);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
+})
+
+likeRouter.post('/', async (req, res) => {
+    try {
+        const like = await Like.create(req.body);
+        res.status(201).json(like);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
+})
+
+module.exports = likeRouter
 
 // // Добавляем middleware для проверки аутентификации
 // likeRouter.post('/:advertisementId', async (req, res) => {

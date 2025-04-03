@@ -76,10 +76,7 @@ function App() {
 
   return (
     <Routes>
-      <Route element={<Layout user={user} logoutHandler={logoutHandler} searchHandler={searchHandler} />}>
-        <Route path="/" element={<CategoryUserPage />}/>
-
-      <Route element={<Layout user={user} logoutHandler={logoutHandler} />}>
+      <Route element={<Layout user={user} logoutHandler={logoutHandler} searchHandler={searchHandler}/>}>
 
         <Route path="/" element={<CategoryUserPage user={user} />}/>
       <Route path="/categories" element={<CategoryUserPage />}></Route>
@@ -139,9 +136,6 @@ function App() {
             </ProtectedRouter>
           }
         />
-
-
-        <Route path="/categories/card/:id" element={<OneCardPage />} />
 
         <Route path="/categories/card/:id" element={<OneCardPage user={user} />} />
 

@@ -11,7 +11,7 @@ const addressRouter = require('./routes/addressRouter');
 const advertisementRouter = require('./routes/advertisementRouter');
 const categoryRouter = require('./routes/categoryRouter');
 const gigaRouter = require('./routes/gigaRouter');
-// const likeRouter = require('./routes/likeRouter');
+const likeRouter = require('./routes/likeRouter');
 
 
 app.use(express.static('public'));
@@ -29,7 +29,7 @@ app.use('/api/advertisements', advertisementRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/giga', gigaRouter);
 
-// app.use('/api/likes', likeRouter);
+app.use('/api/likes', likeRouter);
 
 
 
