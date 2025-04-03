@@ -13,5 +13,13 @@ advertisementRouter.get('/', async (req, res) =>{
     }
 })
 
+advertisementRouter.get('/', async (req, res) => {
+    try{
+        const advertisement = await Advertisement.findByPk()
+    }
+})
+
 
 module.exports = advertisementRouter;
+
+
