@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 import axiosInstance, { setAccessToken } from './API/axiosInstance';
 import { Routes } from 'react-router';
 import { Route } from 'react-router';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Layout from './HOCs/Layout';
 import ProtectedRouter from './HOCs/ProtectedRouter';
 import SignUpPage from './components/pages/SignUpPage';
 import LoginPage from './components/pages/LoginPage';
 
-
 import MainPage from './components/pages/MainPage';
+import YandexMapWithDBPoints from './components/pages/YandexMap';
 
 function App() {
   const [user, setUser] = useState({ status: 'logging' });
@@ -79,6 +80,14 @@ function App() {
             <ProtectedRouter isAllowed={user.status === 'guest'} redirectTo="/">
               <LoginPage loginHandler={loginHandler} />
             </ProtectedRouter>
+          }
+        />
+        <Route
+          path="/map"
+          element={
+            // <ProtectedRouter isAllowed={user.status === 'guest'} redirectTo="/">
+            <YandexMapWithDBPoints />
+            // </ProtectedRouter>
           }
         />
       </Route>
