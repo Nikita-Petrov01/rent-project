@@ -64,8 +64,21 @@ function App() {
     }
   };
 
+  const searchHandler = async (e) => {
+    e.preventDefault();
+    const formData = Object.fromEntries(new FormData(e.target));
+    try {
+      await axiosInstance.post('/giga/search', formData);
+    } catch (error) {
+      console.error('Ошибка при отправке данных:', error)
+    }
+  };
+
   return (
     <Routes>
+      <Route element={<Layout user={user} logoutHandler={logoutHandler} searchHandler={searchHandler} />}>
+        <Route path="/" element={<CategoryUserPage />}/>
+
       <Route element={<Layout user={user} logoutHandler={logoutHandler} />}>
 
         <Route path="/" element={<CategoryUserPage user={user} />}/>
