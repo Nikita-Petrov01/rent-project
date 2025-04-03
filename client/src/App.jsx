@@ -2,17 +2,21 @@ import { useEffect, useState } from 'react';
 import axiosInstance, { setAccessToken } from './API/axiosInstance';
 import { Routes } from 'react-router';
 import { Route } from 'react-router';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Layout from './HOCs/Layout';
 import ProtectedRouter from './HOCs/ProtectedRouter';
 import SignUpPage from './components/pages/SignUpPage';
 import LoginPage from './components/pages/LoginPage';
 
-
 import MainPage from './components/pages/MainPage';
+
+import YandexMapWithDBPoints from './components/pages/YandexMap';
+
 import AdminPageMain from './components/pages/AdminPage/AdminPageMain';
 import CategoryUserPage from './components/pages/CategoryUserPage';
 import OneCardPage from './components/pages/OneCardPage';
+
 
 function App() {
   const [user, setUser] = useState({ status: 'logging' });
@@ -88,6 +92,16 @@ function App() {
             </ProtectedRouter>
           }
         />
+
+        <Route
+          path="/map"
+          element={
+            // <ProtectedRouter isAllowed={user.status === 'guest'} redirectTo="/">
+            <YandexMapWithDBPoints />
+            // </ProtectedRouter>
+          }
+        />
+
         <Route path="/admin" element={
           <ProtectedRouter
           isAllowed={user.status === 'logged' && user.data?.role === 'admin'}
@@ -97,6 +111,7 @@ function App() {
           } />
 
         <Route path='/categories/card/:id' element={<OneCardPage/>}/>
+
       </Route>
     </Routes>
   );
