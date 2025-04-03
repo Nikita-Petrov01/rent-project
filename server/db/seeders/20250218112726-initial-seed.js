@@ -52,7 +52,7 @@ module.exports = {
           'https://i.pinimg.com/originals/de/87/86/de8786df6b7ed61b2a59a51654eb4538.jpg',
           'https://avatars.mds.yandex.net/get-altay/5485499/2a0000017dc061fd3723b44ad48c5cc14bc2/XXL_height'
         ],
-        categoryId: 2,
+        categoryId: 1,
         userId: 1
       },
       {

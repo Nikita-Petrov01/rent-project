@@ -16,7 +16,7 @@ import YandexMapWithDBPoints from './components/pages/YandexMap';
 import AdminPageMain from './components/pages/AdminPage/AdminPageMain';
 import CategoryUserPage from './components/pages/CategoryUserPage';
 import OneCardPage from './components/pages/OneCardPage';
-
+import FavoritesPage from './components/pages/FavoritesPage';
 
 function App() {
   const [user, setUser] = useState({ status: 'logging' });
@@ -65,7 +65,7 @@ function App() {
   return (
     <Routes>
       <Route element={<Layout user={user} logoutHandler={logoutHandler} />}>
-        <Route path="/" element={<CategoryUserPage />}/>
+        <Route path="/" element={<CategoryUserPage />} />
 
         <Route
           path="/signup"
@@ -75,13 +75,21 @@ function App() {
             </ProtectedRouter>
           }
         />
-        
+
         <Route
           path="/login"
           element={
             <ProtectedRouter isAllowed={user.status === 'guest'} redirectTo="/admin">
               <LoginPage loginHandler={loginHandler} />
             </ProtectedRouter>
+          }
+        />
+        <Route
+          path="/favorites"
+          element={
+            // <ProtectedRouter isAllowed={user.status === 'guest'} redirectTo="/admin">
+            <FavoritesPage />
+            // </ProtectedRouter>
           }
         />
 
@@ -94,16 +102,19 @@ function App() {
           }
         />
 
-        <Route path="/admin" element={
-          <ProtectedRouter
-          isAllowed={user.status === 'logged' && user.data?.role === 'admin'}
-          redirectTo="/">
-          <AdminPageMain />
-          </ProtectedRouter>
-          } />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRouter
+              isAllowed={user.status === 'logged' && user.data?.role === 'admin'}
+              redirectTo="/"
+            >
+              <AdminPageMain />
+            </ProtectedRouter>
+          }
+        />
 
-        <Route path='/categories/card/:id' element={<OneCardPage/>}/>
-
+        <Route path="/categories/card/:id" element={<OneCardPage user={user} />} />
       </Route>
     </Routes>
   );

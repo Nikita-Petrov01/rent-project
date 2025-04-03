@@ -59,6 +59,26 @@ export default function NavBar({ logoutHandler, user }) {
                 Главная
               </Link>
 
+              <Link
+                to="/favorites"
+                style={{
+                  color: '#ecf0f1',
+                  textDecoration: 'none',
+                  fontSize: '1.1rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  padding: '5px 10px',
+                  borderRadius: '5px',
+                  transition: 'all 0.3s ease',
+                  ':hover': {
+                    background: 'rgba(255,255,255,0.1)',
+                  },
+                }}
+              >
+                Избранное
+              </Link>
+
               <Button
                 onClick={() => logoutHandler()}
                 style={{
