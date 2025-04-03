@@ -1,11 +1,12 @@
 'use strict';
+
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Advertisement extends Model {
-    static associate({User, Category, Like}) {
-      this.belongsTo(User, {foreignKey: 'userId'})
-      this.belongsTo(Category, {foreignKey: 'categoryId'})
-      this.hasMany(Like, {foreignKey: 'advertisementId'})
+    static associate({ User, Category, Like }) {
+      this.belongsTo(User, { foreignKey: 'userId' });
+      this.belongsTo(Category, { foreignKey: 'categoryId' });
+      this.hasMany(Like, { foreignKey: 'advertisementId' });
     }
   }
   Advertisement.init(
@@ -16,7 +17,10 @@ module.exports = (sequelize, DataTypes) => {
       address: DataTypes.TEXT,
       image: DataTypes.ARRAY(DataTypes.TEXT),
       categoryId: DataTypes.INTEGER,
-      userId: DataTypes.INTEGER,
+      userId: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1,
+      },
     },
     {
       sequelize,

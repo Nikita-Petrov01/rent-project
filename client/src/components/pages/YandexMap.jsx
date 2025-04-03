@@ -65,9 +65,11 @@ const YandexMapWithMarkers = () => {
     <div style={{ width: '100%', height: '80vh', position: 'relative' }}>
       <YMaps query={{ apikey: import.meta.env.VITE_YANDEX_MAPS_API_KEY }}>
         <Map
+          onError={(error) => console.error('Map error:', error)}
+          onLoad={() => console.log('Map loaded successfully')}
           defaultState={{
             center: [55.75, 37.57],
-            zoom: 10,
+            zoom: 12,
           }}
           width="100%"
           height="100%"
@@ -100,7 +102,7 @@ const YandexMapWithMarkers = () => {
             backgroundColor: '#fff',
             border: '1px solid #ccc',
             borderRadius: '4px',
-          
+
             boxShadow: '0 2px 5px rgba(0, 0, 0, 0.36)',
           }}
         >

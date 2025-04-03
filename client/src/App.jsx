@@ -17,7 +17,6 @@ import AdminPageMain from './components/pages/AdminPage/AdminPageMain';
 import CategoryUserPage from './components/pages/CategoryUserPage';
 import OneCardPage from './components/pages/OneCardPage';
 
-
 function App() {
   const [user, setUser] = useState({ status: 'logging' });
 
@@ -102,16 +101,19 @@ function App() {
           }
         />
 
-        <Route path="/admin" element={
-          <ProtectedRouter
-          isAllowed={user.status === 'logged' && user.data?.role === 'admin'}
-          redirectTo="/">
-          <AdminPageMain />
-          </ProtectedRouter>
-          } />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRouter
+              isAllowed={user.status === 'logged' && user.data?.role === 'admin'}
+              redirectTo="/"
+            >
+              <AdminPageMain />
+            </ProtectedRouter>
+          }
+        />
 
-        <Route path='/categories/card/:id' element={<OneCardPage/>}/>
-
+        <Route path="/categories/card/:id" element={<OneCardPage />} />
       </Route>
     </Routes>
   );
