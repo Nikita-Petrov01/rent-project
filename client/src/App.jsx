@@ -7,9 +7,6 @@ import Layout from './HOCs/Layout';
 import ProtectedRouter from './HOCs/ProtectedRouter';
 import SignUpPage from './components/pages/SignUpPage';
 import LoginPage from './components/pages/LoginPage';
-
-
-import MainPage from './components/pages/MainPage';
 import AdminPageMain from './components/pages/AdminPage/AdminPageMain';
 import CategoryUserPage from './components/pages/CategoryUserPage';
 import OneCardPage from './components/pages/OneCardPage';
@@ -58,9 +55,19 @@ function App() {
     }
   };
 
+  const searchHandler = async (e) => {
+    e.preventDefault();
+    const formData = Object.fromEntries(new FormData(e.target));
+    try {
+      await axiosInstance.post('/giga/search', formData);
+    } catch (error) {
+      console.error('Ошибка при отправке данных:', error)
+    }
+  };
+
   return (
     <Routes>
-      <Route element={<Layout user={user} logoutHandler={logoutHandler} />}>
+      <Route element={<Layout user={user} logoutHandler={logoutHandler} searchHandler={searchHandler} />}>
         <Route path="/" element={<CategoryUserPage />}/>
 
         <Route
@@ -71,7 +78,7 @@ function App() {
             </ProtectedRouter>
           }
         />
-        
+
         <Route
           path="/login"
           element={

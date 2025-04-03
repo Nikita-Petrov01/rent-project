@@ -1,7 +1,8 @@
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Button, Container, Form, FormControl, Nav, Navbar } from 'react-bootstrap';
+import { Link } from 'react-router';
 
-export default function NavBar({ logoutHandler, user }) {
+
+export default function NavBar({ logoutHandler, user, searchHandler }) {
   return (
     <Navbar
       style={{
@@ -29,6 +30,42 @@ export default function NavBar({ logoutHandler, user }) {
             ? `Приветствую, ${user?.data?.name}`
             : 'Приветствую,  Гость'}
         </Navbar.Brand>
+
+        <Form onSubmit={searchHandler} className="d-flex" style={{ width: '40%' }}>
+          <FormControl
+            type="search"
+            name='query'
+            placeholder="Поиск..."
+            className="me-2"
+            aria-label="Search"
+            style={{
+              borderRadius: '20px',
+              border: 'none',
+              padding: '10px 20px',
+              background: 'rgba(255, 255, 255, 0.2)',
+              color: 'white',
+              '::placeholder': {
+                color: 'rgba(255, 255, 255, 0.7)',
+              },
+            }}
+          />
+          <Button
+            type="submit"
+            variant="outline-light" 
+            style={{
+              borderRadius: '20px',
+              border: '2px solid white',
+              background: 'transparent',
+              padding: '0 20px',
+              transition: 'all 0.3s ease',
+              ':hover': {
+                background: 'rgba(255, 255, 255, 0.2)',
+              },
+            }}
+          >
+            Найти
+          </Button>
+        </Form>
 
         <Nav className="d-flex align-items-center gap-4">
           {user.status === 'logged' && (
