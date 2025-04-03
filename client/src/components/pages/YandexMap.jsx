@@ -37,9 +37,9 @@ const YandexMapWithMarkers = () => {
   const geocodeAddress = async (address) => {
     try {
       const response = await fetch(
-        `https://geocode-maps.yandex.ru/1.x/?apikey=ea14f048-2afa-4915-b4fb-6b07903e503d&format=json&geocode=${encodeURIComponent(
-          address,
-        )}`,
+        `https://geocode-maps.yandex.ru/1.x/?apikey=${
+          import.meta.env.VITE_YANDEX_MAPS_API_KEY
+        }&format=json&geocode=${encodeURIComponent(address)}`,
       );
       const data = await response.json();
 
@@ -62,12 +62,14 @@ const YandexMapWithMarkers = () => {
   }
 
   return (
-    <div style={{ width: '100%', height: '500px', position: 'relative' }}>
-      <YMaps query={{ apikey: 'ea14f048-2afa-4915-b4fb-6b07903e503d' }}>
+    <div style={{ width: '100%', height: '80vh', position: 'relative' }}>
+      <YMaps query={{ apikey: import.meta.env.VITE_YANDEX_MAPS_API_KEY }}>
         <Map
+          onError={(error) => console.error('Map error:', error)}
+          onLoad={() => console.log('Map loaded successfully')}
           defaultState={{
             center: [55.75, 37.57],
-            zoom: 10,
+            zoom: 12,
           }}
           width="100%"
           height="100%"
@@ -85,6 +87,28 @@ const YandexMapWithMarkers = () => {
           ))}
         </Map>
       </YMaps>
+      <div
+        style={{
+          position: 'absolute',
+          top: '20px',
+          left: '20px',
+          zIndex: 999,
+        }}
+      >
+        <button
+          onClick={() => navigate('/categories')}
+          style={{
+            padding: '10px 15px',
+            backgroundColor: '#fff',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+
+            boxShadow: '0 2px 5px rgba(0, 0, 0, 0.36)',
+          }}
+        >
+          Показать списком
+        </button>
+      </div>
 
       {/* Всплывающая подсказка при наведении */}
       {hoveredMarker && (
@@ -123,7 +147,7 @@ const YandexMapWithMarkers = () => {
             <p style={{ margin: '0 0 12px 0' }}>{hoveredMarker.description}</p>
           )}
           <Button
-            onClick={()=>navigate(`../categories/card/${hoveredMarker.id}`)}
+            onClick={() => navigate(`../categories/card/${hoveredMarker.id}`)}
             variant="secondary"
           >
             Подробнее

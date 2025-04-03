@@ -16,7 +16,9 @@ import YandexMapWithDBPoints from './components/pages/YandexMap';
 import AdminPageMain from './components/pages/AdminPage/AdminPageMain';
 import CategoryUserPage from './components/pages/CategoryUserPage';
 import OneCardPage from './components/pages/OneCardPage';
+
 import FavoritesPage from './components/pages/FavoritesPage';
+
 
 function App() {
   const [user, setUser] = useState({ status: 'logging' });
@@ -65,7 +67,18 @@ function App() {
   return (
     <Routes>
       <Route element={<Layout user={user} logoutHandler={logoutHandler} />}>
-        <Route path="/" element={<CategoryUserPage />} />
+
+        <Route path="/" element={<CategoryUserPage user={user} />}/>
+      <Route path="/categories" element={<CategoryUserPage />}></Route>
+        <Route
+          path="/"
+          element={
+            <ProtectedRouter isAllowed={user.status === 'logged'}>
+              <CategoryUserPage user={user} />
+            </ProtectedRouter>
+          }
+        />
+
 
         <Route
           path="/signup"
@@ -114,7 +127,11 @@ function App() {
           }
         />
 
+
+        <Route path="/categories/card/:id" element={<OneCardPage />} />
+
         <Route path="/categories/card/:id" element={<OneCardPage user={user} />} />
+
       </Route>
     </Routes>
   );

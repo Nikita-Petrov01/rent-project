@@ -1,7 +1,11 @@
 const express = require('express');
 const advertisementRouter = express.Router();
 const { Advertisement } = require('../../db/models');
+
+const AdvertisementController = require('../controllers/AdvertisementController');
+
 // const { Category } = require('../../db/models');
+
 
 advertisementRouter.get('/', async (req, res) => {
   try {
@@ -40,5 +44,9 @@ advertisementRouter.get('/:id', async (req, res) => {
 // });
 
 
+
+advertisementRouter.post('/create', AdvertisementController.createAdvertisement);
+advertisementRouter.delete('/:id', AdvertisementController.delete);
+advertisementRouter.put('/update/:id', AdvertisementController.update);
 
 module.exports = advertisementRouter;
