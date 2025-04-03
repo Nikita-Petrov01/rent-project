@@ -10,9 +10,11 @@ import LoginPage from './components/pages/LoginPage';
 
 
 import MainPage from './components/pages/MainPage';
+import AdminPageMain from './components/pages/AdminPage/AdminPageMain';
 
 function App() {
   const [user, setUser] = useState({ status: 'logging' });
+
   useEffect(() => {
     axiosInstance('/tokens/refresh')
       .then(({ data }) => {
@@ -57,18 +59,11 @@ function App() {
   return (
     <Routes>
       <Route element={<Layout user={user} logoutHandler={logoutHandler} />}>
-        <Route
-          path="/"
-          element={
-            <ProtectedRouter isAllowed={user.status === 'logged'}>
-              <MainPage user={user} />
-            </ProtectedRouter>
-          }
-        />
+        <Route path="/" element={<MainPage user={user} />}/>
         <Route
           path="/signup"
           element={
-            <ProtectedRouter isAllowed={user.status === 'guest'} redirectTo="/">
+            <ProtectedRouter isAllowed={user.status === 'guest'} redirectTo="/admin">
               <SignUpPage signUpHandler={signUpHandler} />
             </ProtectedRouter>
           }
@@ -76,11 +71,18 @@ function App() {
         <Route
           path="/login"
           element={
-            <ProtectedRouter isAllowed={user.status === 'guest'} redirectTo="/">
+            <ProtectedRouter isAllowed={user.status === 'guest'} redirectTo="/admin">
               <LoginPage loginHandler={loginHandler} />
             </ProtectedRouter>
           }
         />
+        <Route path="/admin" element={
+          <ProtectedRouter
+          isAllowed={user.status === 'logged' && user.data?.role === 'admin'}
+          redirectTo="/">
+          <AdminPageMain />
+          </ProtectedRouter>
+          } />
       </Route>
     </Routes>
   );
