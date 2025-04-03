@@ -38,7 +38,7 @@ const navigate = useNavigate()
   };
 
   return (
-    <Container className="d-flex flex-column align-items-center">
+    <Container style={{ maxWidth: '1400px' }} className="d-flex flex-column align-items-center">
       <Select 
         categories={categories} 
         onSelect={handleCategorySelect} 

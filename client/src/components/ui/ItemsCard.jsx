@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 export default function ItemsCard({ item }) {
   return (
-    <Card style={{ width: '18rem' }} data-testid={item?.id}>
+    <Card style={{ width: '100%' }} data-testid={item?.id}>
     <Link to={`/categories/card/${item.id}`}>
       {item?.image && (
           <Card.Img
@@ -22,7 +22,7 @@ export default function ItemsCard({ item }) {
         <Card.Text>{item?.description?.slice(0, 100)}</Card.Text>
         {item?.price && (
             <p>
-            <b>price: {item?.price}</b>
+            <b>Цена: {item?.price} ₽</b>
           </p>
         )}
       </Card.Body>
