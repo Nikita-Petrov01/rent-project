@@ -10,10 +10,17 @@ import SignUpPage from './components/pages/SignUpPage';
 import LoginPage from './components/pages/LoginPage';
 
 import MainPage from './components/pages/MainPage';
+
 import YandexMapWithDBPoints from './components/pages/YandexMap';
+
+import AdminPageMain from './components/pages/AdminPage/AdminPageMain';
+import CategoryUserPage from './components/pages/CategoryUserPage';
+import OneCardPage from './components/pages/OneCardPage';
+
 
 function App() {
   const [user, setUser] = useState({ status: 'logging' });
+
   useEffect(() => {
     axiosInstance('/tokens/refresh')
       .then(({ data }) => {
@@ -58,6 +65,8 @@ function App() {
   return (
     <Routes>
       <Route element={<Layout user={user} logoutHandler={logoutHandler} />}>
+        <Route path="/" element={<MainPage user={user} />}/>
+      <Route path="/categories" element={<CategoryUserPage />}></Route>
         <Route
           path="/"
           element={
@@ -66,10 +75,11 @@ function App() {
             </ProtectedRouter>
           }
         />
+
         <Route
           path="/signup"
           element={
-            <ProtectedRouter isAllowed={user.status === 'guest'} redirectTo="/">
+            <ProtectedRouter isAllowed={user.status === 'guest'} redirectTo="/admin">
               <SignUpPage signUpHandler={signUpHandler} />
             </ProtectedRouter>
           }
@@ -77,11 +87,12 @@ function App() {
         <Route
           path="/login"
           element={
-            <ProtectedRouter isAllowed={user.status === 'guest'} redirectTo="/">
+            <ProtectedRouter isAllowed={user.status === 'guest'} redirectTo="/admin">
               <LoginPage loginHandler={loginHandler} />
             </ProtectedRouter>
           }
         />
+
         <Route
           path="/map"
           element={
@@ -90,6 +101,17 @@ function App() {
             // </ProtectedRouter>
           }
         />
+
+        <Route path="/admin" element={
+          <ProtectedRouter
+          isAllowed={user.status === 'logged' && user.data?.role === 'admin'}
+          redirectTo="/">
+          <AdminPageMain />
+          </ProtectedRouter>
+          } />
+
+        <Route path='/categories/card/:id' element={<OneCardPage/>}/>
+
       </Route>
     </Routes>
   );
