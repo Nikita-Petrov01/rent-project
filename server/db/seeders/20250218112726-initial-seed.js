@@ -41,42 +41,66 @@ module.exports = {
 
     await Advertisement.bulkCreate([
       {
-        title: 'Санкт-Петербург (Ленинградская область)',
-        description: 'Квартира в центре Санкт-Петербурга',
-        price: 100.000,
-        address: 'Санкт-Петербург, ул. Большая Конюшенная, д. 19',
-        image: ['https://a0.muscache.com/im/pictures/airflow/Hosting-8131091/original/e3f0f59b-4190-47d2-addf-f54b78ff4782.jpg?im_w=960', 'https://a0.muscache.com/im/pictures/ac0ae5bf-ae4c-4a6f-9cc2-6e1b10556859.jpg?im_w=480', 'https://a0.muscache.com/im/pictures/airflow/Hosting-8131091/original/6f8b5dbe-aa32-4068-a730-7b344ce1ea43.jpg?im_w=480', 'https://a0.muscache.com/im/pictures/airflow/Hosting-8131091/original/20c7792c-a483-45d0-88a5-f39b5a092779.jpg?im_w=480'],
+        title: 'Санкт-Петербург, исторический центр',
+        description: `Элегантная квартира в старинном доме в самом сердце Санкт-Петербурга с видом на канал Грибоедова. Высокие потолки с лепниной, большие французские окна и паркетный пол создают неповторимую атмосферу северной столицы. Всего пять минут пешком до Невского проспекта, Дворцовой площади и Эрмитажа. В квартире сделан современный ремонт с сохранением исторических деталей - восстановлены старинные двери, отреставрирована печь с изразцами. Просторная спальня с двуспальной кроватью, гостиная с мягким уголком и раскладным диваном, полностью оборудованная кухня со всей необходимой техникой. В шаговой доступности лучшие рестораны города, театры и музеи. Идеальный вариант для тех, кто хочет почувствовать настоящий дух Петербурга.`,
+        price: 120000,
+        address: 'наб. канала Грибоедова, д. 15',
+        image: [
+          'https://example.com/spb1.jpg',
+          'https://example.com/spb2.jpg',
+          'https://example.com/spb3.jpg',
+          'https://example.com/spb4.jpg',
+          'https://example.com/spb5.jpg'
+        ],
         categoryId: 2,
-        userId: 1,
+        userId: 1
       },
       {
-        title: 'Череповец (Вологодская область)',
-        description: 'Комната на окраине Череповца',
-        price: 50.000,
-        address: 'Череповец, ул. Пушкинская, д. 19',
-        image: ['https://a0.muscache.com/im/pictures/airflow/Hosting-8131091/original/e3f0f59b-4190-47d2-addf-f54b78ff4782.jpg?im_w=960', 'https://a0.muscache.com/im/pictures/ac0ae5bf-ae4c-4a6f-9cc2-6e1b10556859.jpg?im_w=480', 'https://a0.muscache.com/im/pictures/airflow/Hosting-8131091/original/6f8b5dbe-aa32-4068-a730-7b344ce1ea43.jpg?im_w=480', 'https://a0.muscache.com/im/pictures/airflow/Hosting-8131091/original/20c7792c-a483-45d0-88a5-f39b5a092779.jpg?im_w=480'],
-        categoryId: 1,
-        userId: 1,
+        title: 'Москва, апартаменты у Красной площади',
+        description: `Стильные современные апартаменты с панорамными окнами и видом на Кремль. Просторная студия 50 кв.м с дизайнерским ремонтом, кухонным островом и зоной отдыха. Удобная двуспальная кровать с ортопедическим матрасом, просторная душевая кабина с тропическим душем. В пешей доступности все главные достопримечательности - Красная площадь, ГУМ, Большой театр. Роскошный вид на ночную подсветку Кремля. В доме есть фитнес-центр с бассейном и спа-зоной. Консьерж-сервис круглосуточно. Прекрасный вариант для деловой поездки или романтического путешествия.`,
+        price: 150000,
+        address: 'ул. Никольская, д. 10',
+        image: [
+          'https://example.com/moscow1.jpg',
+          'https://example.com/moscow2.jpg',
+          'https://example.com/moscow3.jpg',
+          'https://example.com/moscow4.jpg',
+          'https://example.com/moscow5.jpg'
+        ],
+        categoryId: 2,
+        userId: 1
       },
       {
-        title: 'Сочи (Краснадарский край)',
-        description: 'Дом у морского побережья',
-        price: 150.000,
-        address: 'Сочи, ул. Зеленая д. 7',
-        image: ['https://a0.muscache.com/im/pictures/airflow/Hosting-8131091/original/e3f0f59b-4190-47d2-addf-f54b78ff4782.jpg?im_w=960', 'https://a0.muscache.com/im/pictures/ac0ae5bf-ae4c-4a6f-9cc2-6e1b10556859.jpg?im_w=480', 'https://a0.muscache.com/im/pictures/airflow/Hosting-8131091/original/6f8b5dbe-aa32-4068-a730-7b344ce1ea43.jpg?im_w=480', 'https://a0.muscache.com/im/pictures/airflow/Hosting-8131091/original/20c7792c-a483-45d0-88a5-f39b5a092779.jpg?im_w=480'],
+        title: 'Сочи, вилла у моря',
+        description: `Роскошная трехэтажная вилла с частным пляжем и инфранискрасным бассейном в престижном районе Сочи. Территория 15 соток с тропическим садом, зоной барбекю и панорамным видом на море. В доме четыре спальни с кроватями king-size, просторная гостиная с камином, кухня-столовая с техникой премиум-класса, домашний кинотеатр и винный погреб. Собственный спуск к оборудованному пляжу с шезлонгами и зонтиками. Персональный обслуживающий персонал включая повара и горничную. Идеальное место для VIP-отдыха в любое время года. В пяти минутах езды центр Сочи с ресторанами и развлечениями.`,
+        price: 350000,
+        address: 'ул. Приморская, д. 42',
+        image: [
+          'https://example.com/sochi1.jpg',
+          'https://example.com/sochi2.jpg',
+          'https://example.com/sochi3.jpg',
+          'https://example.com/sochi4.jpg',
+          'https://example.com/sochi5.jpg'
+        ],
         categoryId: 3,
-        userId: 1,
+        userId: 1
       },
       {
-        title: 'Магадан (Магаданская область)',
-        description: 'Особняк возле ИК-3 Магадан',
-        price: 280.000,
-        address: 'Магадан, ул. Мирная д. 21',
-        image: ['https://a0.muscache.com/im/pictures/airflow/Hosting-8131091/original/e3f0f59b-4190-47d2-addf-f54b78ff4782.jpg?im_w=960', 'https://a0.muscache.com/im/pictures/ac0ae5bf-ae4c-4a6f-9cc2-6e1b10556859.jpg?im_w=480', 'https://a0.muscache.com/im/pictures/airflow/Hosting-8131091/original/6f8b5dbe-aa32-4068-a730-7b344ce1ea43.jpg?im_w=480', 'https://a0.muscache.com/im/pictures/airflow/Hosting-8131091/original/20c7792c-a483-45d0-88a5-f39b5a092779.jpg?im_w=480'],
-        categoryId: 3,
-        userId: 1,
-      },
-    ])
+        title: 'Казань, апартаменты в историческом центре',
+        description: `Уютные апартаменты в отреставрированном купеческом особняке в самом сердце Казани. Всего 10 минут пешком до Кремля и набережной. Интерьер сочетает современный комфорт и элементы татарского декора - расписные панно, витражи и кованые детали. Просторная спальня с балконом, гостиная с мягкими диванами, полностью оборудованная кухня. В шаговой доступности кафе с национальной кухней, сувенирные лавки и музеи. Особый шарм придают виды на старинные улочки и вечернюю подсветку мечетей. Прекрасный вариант для знакомства с культурой Татарстана.`,
+        price: 80000,
+        address: 'ул. Баумана, д. 25',
+        image: [
+          'https://example.com/kazan1.jpg',
+          'https://example.com/kazan2.jpg',
+          'https://example.com/kazan3.jpg',
+          'https://example.com/kazan4.jpg',
+          'https://example.com/kazan5.jpg'
+        ],
+        categoryId: 2,
+        userId: 1
+      }
+    ]);
   },
 
  

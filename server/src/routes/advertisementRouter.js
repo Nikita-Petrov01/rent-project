@@ -13,13 +13,19 @@ advertisementRouter.get('/', async (req, res) =>{
     }
 })
 
-advertisementRouter.get('/', async (req, res) => {
+advertisementRouter.get('/:id', async (req, res) => {
     try{
-        const advertisement = await Advertisement.findByPk()
+        const advertisement = await Advertisement.findByPk(req.params.id)
+        if(!advertisement){
+            return res.status(404).json({massege: 'Объявление не найдено'})
+        }
+        res.status(200).json(advertisement)
+    } catch(error){
+        console.log(error);
+        res.status(500).set(error)
+        
     }
 })
 
 
 module.exports = advertisementRouter;
-
-
