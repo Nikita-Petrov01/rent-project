@@ -22,7 +22,7 @@ export default function ItemsCard({ item }) {
         <Card.Text>{item?.description?.slice(0, 100)}</Card.Text>
         {item?.price && (
             <p>
-            <b>price: {item?.price}</b>
+            <b>Цена: {item?.price} ₽</b>
           </p>
         )}
       </Card.Body>
