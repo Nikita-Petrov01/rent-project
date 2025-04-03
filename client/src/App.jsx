@@ -10,6 +10,7 @@ import LoginPage from './components/pages/LoginPage';
 
 
 import MainPage from './components/pages/MainPage';
+import AdminPageMain from './components/pages/AdminPage/AdminPageMain';
 import CategoryUserPage from './components/pages/CategoryUserPage';
 import OneCardPage from './components/pages/OneCardPage';
 
@@ -70,6 +71,7 @@ function App() {
             </ProtectedRouter>
           }
         />
+
         <Route
           path="/signup"
           element={
@@ -93,6 +95,7 @@ function App() {
           <AdminPageMain />
           </ProtectedRouter>
           } />
+
         <Route path='/categories/card/:id' element={<OneCardPage/>}/>
       </Route>
     </Routes>
