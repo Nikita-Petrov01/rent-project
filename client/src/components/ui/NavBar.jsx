@@ -5,7 +5,7 @@ export default function NavBar({ logoutHandler, user }) {
   return (
     <Navbar
       style={{
-        background: 'linear-gradient(to right, #2c3e50, #3498db)',
+        background: 'linear-gradient(to right,rgb(112, 39, 104),rgb(219, 52, 52))',
         minHeight: '10vh',
         borderBottom: '1px solid rgba(255,255,255,0.1)',
         position: 'sticky',
