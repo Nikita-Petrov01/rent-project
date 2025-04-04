@@ -1,8 +1,11 @@
 import { Button, Container, Form, FormControl, Nav, Navbar } from 'react-bootstrap';
-import { Link } from 'react-router';
+import { Link, useLocation, useParams } from 'react-router';
 
 
 export default function NavBar({ logoutHandler, user, searchHandler }) {
+  const {id} = useParams()
+  const location = useLocation();
+  const searchRoutes = ['/', '/admin', `/categories/card/${id}`]
   return (
     <Navbar
       style={{
@@ -31,6 +34,7 @@ export default function NavBar({ logoutHandler, user, searchHandler }) {
             : 'Приветствую,  Гость'}
         </Navbar.Brand>
 
+        {searchRoutes.includes(location.pathname) && (
         <Form onSubmit={searchHandler} className="d-flex" style={{ width: '40%' }}>
           <FormControl
             type="search"
@@ -66,37 +70,67 @@ export default function NavBar({ logoutHandler, user, searchHandler }) {
             Найти
           </Button>
         </Form>
+        )}
 
         <Nav className="d-flex align-items-center gap-4">
-          {user.status === 'logged' && (
             <>
-              <Link
-                to={'/'}
-                style={{
-                  color: '#ecf0f1',
-                  textDecoration: 'none',
-                  fontSize: '1.1rem',
-                  position: 'relative',
-                  padding: '5px 0',
-                  ':after': {
-                    content: '""',
-                    position: 'absolute',
-                    width: '0',
-                    height: '2px',
-                    bottom: '0',
-                    left: '0',
-                    background: '#e74c3c',
-                    transition: 'width 0.3s ease',
-                  },
-                  ':hover:after': {
-                    width: '100%',
-                  },
-                }}
-              >
+          {user.status === 'logged' && user.data?.role !== 'admin' ? (
+            <Link
+            to={'/'}
+            style={{
+              color: '#ecf0f1',
+              textDecoration: 'none',
+              fontSize: '1.1rem',
+              position: 'relative',
+              padding: '5px 0',
+              ':after': {
+                content: '""',
+                position: 'absolute',
+                width: '0',
+                height: '2px',
+                bottom: '0',
+                left: '0',
+                background: '#e74c3c',
+                transition: 'width 0.3s ease',
+              },
+              ':hover:after': {
+                width: '100%',
+              },
+            }}
+            >
                 Главная
               </Link>
+              ) : (
+                <Link
+            to={'/admin'}
+            style={{
+              color: '#ecf0f1',
+              textDecoration: 'none',
+              fontSize: '1.1rem',
+              position: 'relative',
+              padding: '5px 0',
+              ':after': {
+                content: '""',
+                position: 'absolute',
+                width: '0',
+                height: '2px',
+                bottom: '0',
+                left: '0',
+                background: '#e74c3c',
+                transition: 'width 0.3s ease',
+              },
+              ':hover:after': {
+                width: '100%',
+              },
+            }}
+            >
+                Главная
+              </Link>
+              )}
 
-              <Link
+              {user.status === 'logged' && user.data?.role !== 'admin' && (
+
+                <Link
                 to="/favorites"
                 style={{
                   color: '#ecf0f1',
@@ -112,11 +146,13 @@ export default function NavBar({ logoutHandler, user, searchHandler }) {
                     background: 'rgba(255,255,255,0.1)',
                   },
                 }}
-              >
+                >
                 Избранное
               </Link>
+              )}
 
-              <Button
+              {user.status === 'logged' && (
+                <Button
                 onClick={() => logoutHandler()}
                 style={{
                   background: 'transparent',
@@ -132,11 +168,12 @@ export default function NavBar({ logoutHandler, user, searchHandler }) {
                     transform: 'scale(1.05)',
                   },
                 }}
-              >
+                >
                 Выход
               </Button>
+              )}
             </>
-          )}
+          
           {user.status === 'guest' && (
             <div className="d-flex gap-4 align-items-center">
               <Link

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axiosInstance from '../../API/axiosInstance';
 
-function OneCardPage({user}) {
+function OneCardPage({user, gigaCard}) {
   const { id } = useParams();
   const [advertisement, setAdvertisement] = useState();
   const [isFavorite, setIsFavorite] = useState(false);
@@ -15,8 +15,6 @@ function OneCardPage({user}) {
       .then((response) => setAdvertisement(response.data))
       .catch((error) => console.log(error));
   }, [id]);
-
-
 
   const likeHandler = () => {
     const favorites = {userId: user.data.id, advertisementId: Number(id)}

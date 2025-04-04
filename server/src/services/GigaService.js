@@ -6,6 +6,7 @@ class GigaService {
 
     constructor() {
         this.giga = new Gigachat({
+            timeout: 600,
             credentials: process.env.GIGACHAT_AUTH_KEY,
             model: 'GigaChat',
         })
