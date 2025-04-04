@@ -34,8 +34,7 @@ export default function SignUpPage({ signUpHandler }) {
       className="d-flex justify-content-center align-items-center"
       style={{
         minHeight: '100vh',
-        minWidth: '100%',
-        background: 'linear-gradient(135deg, #2ecc71 0%, #27ae60 50%, #1abc9c 100%)',
+        background: '#f9f9f9', // Светлый фон
         padding: '20px',
       }}
     >
@@ -47,33 +46,19 @@ export default function SignUpPage({ signUpHandler }) {
         style={{
           maxWidth: '450px',
           width: '100%',
-          background: 'rgba(255, 255, 255, 0.95)',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
-          boxShadow: '0 15px 35px rgba(46, 204, 113, 0.2)',
+          background: '#ffffff', // Белый фон формы
+          border: '1px solid #ddd', // Легкая граница
+          borderRadius: '10px',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Легкая тень
         }}
       >
         <h2
           className="text-center mb-4"
           style={{
-            color: '#27ae60',
-            fontSize: '2.2rem',
-            fontWeight: '600',
-            letterSpacing: '1px',
-            marginBottom: '1.5rem',
-            position: 'relative',
-            paddingBottom: '10px',
-            ':after': {
-              content: '""',
-              position: 'absolute',
-              bottom: '0',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '60px',
-              height: '3px',
-              background: '#2ecc71',
-              borderRadius: '2px',
-            },
+            color: '#2c3e50', // Темный текст
+            fontSize: '1.8rem',
+            fontWeight: 'bold',
+            marginBottom: '20px',
           }}
         >
           Регистрация
@@ -84,11 +69,11 @@ export default function SignUpPage({ signUpHandler }) {
             variant="danger"
             className="mb-4"
             style={{
-              borderRadius: '12px',
-              border: 'none',
-              background: 'rgba(231, 76, 60, 0.1)',
+              borderRadius: '8px',
+              border: '1px solid #e74c3c',
+              background: '#fce4e4',
               color: '#e74c3c',
-              padding: '15px',
+              padding: '10px',
               fontSize: '0.95rem',
             }}
           >
@@ -99,10 +84,9 @@ export default function SignUpPage({ signUpHandler }) {
         <Form.Group className="mb-4" controlId="formBasic">
           <Form.Label
             style={{
-              color: '#27ae60',
-              fontSize: '1.1rem',
+              color: '#2c3e50',
+              fontSize: '1rem',
               fontWeight: '500',
-              marginBottom: '8px',
             }}
           >
             Имя
@@ -113,19 +97,15 @@ export default function SignUpPage({ signUpHandler }) {
             placeholder="Введите имя"
             required
             minLength={2}
-            style={{
-              padding: '12px 20px',
+           style={{
+              padding: '10px',
               fontSize: '1rem',
-              border: '2px solid #e8f3ed',
-              borderRadius: '12px',
-              transition: 'all 0.3s ease',
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              ':focus': {
-                borderColor: '#2ecc71',
-                boxShadow: '0 0 0 3px rgba(46, 204, 113, 0.1)',
-                outline: 'none',
-              },
+              border: '1px solid #ddd',
+              borderRadius: '8px',
+              transition: 'border-color 0.3s ease',
             }}
+            onFocus={(e) => (e.target.style.borderColor = '#3498db')}
+            onBlur={(e) => (e.target.style.borderColor = '#ddd')}
           />
           <Form.Control.Feedback
             type="invalid"
@@ -141,12 +121,11 @@ export default function SignUpPage({ signUpHandler }) {
 
         <Form.Group className="mb-4" controlId="formBasicEmail">
           <Form.Label
-            style={{
-              color: '#27ae60',
-              fontSize: '1.1rem',
-              fontWeight: '500',
-              marginBottom: '8px',
-            }}
+           style={{
+            color: '#2c3e50',
+            fontSize: '1rem',
+            fontWeight: '500',
+          }}
           >
             Email
           </Form.Label>
@@ -156,18 +135,14 @@ export default function SignUpPage({ signUpHandler }) {
             placeholder="Введите email"
             required
             style={{
-              padding: '12px 20px',
+              padding: '10px',
               fontSize: '1rem',
-              border: '2px solid #e8f3ed',
-              borderRadius: '12px',
-              transition: 'all 0.3s ease',
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              ':focus': {
-                borderColor: '#2ecc71',
-                boxShadow: '0 0 0 3px rgba(46, 204, 113, 0.1)',
-                outline: 'none',
-              },
+              border: '1px solid #ddd',
+              borderRadius: '8px',
+              transition: 'border-color 0.3s ease',
             }}
+            onFocus={(e) => (e.target.style.borderColor = '#3498db')}
+            onBlur={(e) => (e.target.style.borderColor = '#ddd')}
           />
           <Form.Control.Feedback
             type="invalid"
@@ -184,10 +159,9 @@ export default function SignUpPage({ signUpHandler }) {
         <Form.Group className="mb-4" controlId="formBasicPassword">
           <Form.Label
             style={{
-              color: '#27ae60',
-              fontSize: '1.1rem',
+              color: '#2c3e50',
+              fontSize: '1rem',
               fontWeight: '500',
-              marginBottom: '8px',
             }}
           >
             Пароль
@@ -199,18 +173,14 @@ export default function SignUpPage({ signUpHandler }) {
             required
             minLength={6}
             style={{
-              padding: '12px 20px',
+              padding: '10px',
               fontSize: '1rem',
-              border: '2px solid #e8f3ed',
-              borderRadius: '12px',
-              transition: 'all 0.3s ease',
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              ':focus': {
-                borderColor: '#2ecc71',
-                boxShadow: '0 0 0 3px rgba(46, 204, 113, 0.1)',
-                outline: 'none',
-              },
+              border: '1px solid #ddd',
+              borderRadius: '8px',
+              transition: 'border-color 0.3s ease',
             }}
+            onFocus={(e) => (e.target.style.borderColor = '#3498db')}
+            onBlur={(e) => (e.target.style.borderColor = '#ddd')}
           />
           <Form.Control.Feedback
             type="invalid"
@@ -226,12 +196,11 @@ export default function SignUpPage({ signUpHandler }) {
 
         <Form.Group className="mb-4" controlId="formBasicConfirmPassword">
           <Form.Label
-            style={{
-              color: '#27ae60',
-              fontSize: '1.1rem',
-              fontWeight: '500',
-              marginBottom: '8px',
-            }}
+          style={{
+            color: '#2c3e50',
+            fontSize: '1rem',
+            fontWeight: '500',
+          }}
           >
             Подтверждение пароля
           </Form.Label>
@@ -241,18 +210,14 @@ export default function SignUpPage({ signUpHandler }) {
             placeholder="Повторите пароль"
             required
             style={{
-              padding: '12px 20px',
+              padding: '10px',
               fontSize: '1rem',
-              border: '2px solid #e8f3ed',
-              borderRadius: '12px',
-              transition: 'all 0.3s ease',
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              ':focus': {
-                borderColor: '#2ecc71',
-                boxShadow: '0 0 0 3px rgba(46, 204, 113, 0.1)',
-                outline: 'none',
-              },
+              border: '1px solid #ddd',
+              borderRadius: '8px',
+              transition: 'border-color 0.3s ease',
             }}
+            onFocus={(e) => (e.target.style.borderColor = '#3498db')}
+            onBlur={(e) => (e.target.style.borderColor = '#ddd')}
           />
           <Form.Control.Feedback
             type="invalid"
@@ -270,18 +235,17 @@ export default function SignUpPage({ signUpHandler }) {
           type="submit"
           className="w-100 mb-4"
           style={{
-            background: '#d35400',
+            background: '#3498db',
             border: 'none',
-            padding: '12px',
-            fontSize: '1.1rem',
-            fontWeight: '600',
-            borderRadius: '12px',
-            transition: 'all 0.3s ease',
-            ':hover': {
-              transform: 'translateY(-2px)',
-              boxShadow: '0 7px 14px rgba(46, 204, 113, 0.3)',
-            },
+            padding: '10px',
+            fontSize: '1rem',
+            fontWeight: 'bold',
+            borderRadius: '8px',
+            color: '#fff',
+            transition: 'background 0.3s ease',
           }}
+          onMouseOver={(e) => (e.target.style.background = '#2980b9')}
+          onMouseOut={(e) => (e.target.style.background = '#3498db')}
         >
           Зарегистрироваться
         </Button>
@@ -290,15 +254,14 @@ export default function SignUpPage({ signUpHandler }) {
           <Link
             to="/login"
             style={{
-              color: '#27ae60',
+              color: '#3498db',
               textDecoration: 'none',
               fontSize: '1rem',
               fontWeight: '500',
               transition: 'color 0.3s ease',
-              ':hover': {
-                color: '#2ecc71',
-              },
             }}
+            onMouseOver={(e) => (e.target.style.color = '#2980b9')}
+            onMouseOut={(e) => (e.target.style.color = '#3498db')}
           >
             Уже есть аккаунт? Войти
           </Link>

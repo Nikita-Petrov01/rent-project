@@ -4,7 +4,7 @@ import Select from '../../ui/Select';
 import ItemsCard from '../../ui/ItemsCard';
 import axiosInstance from '../../../API/axiosInstance';
 import CreateAdvert from '../../ui/Create';
-import UpdateAdvert from "../../ui/Update";
+import UpdateAdvert from '../../ui/Update';
 
 export default function AdminPage() {
   const [categories, setCategories] = useState([]);
@@ -44,10 +44,8 @@ export default function AdminPage() {
   }
 
   const handleAdvertUpdate = (updatedItem) => {
-    setHotels(prevItems => 
-      prevItems.map(item => 
-        item.id === updatedItem.id ? updatedItem : item
-      )
+    setHotels((prevItems) =>
+      prevItems.map((item) => (item.id === updatedItem.id ? updatedItem : item)),
     );
   };
 
@@ -66,17 +64,51 @@ export default function AdminPage() {
   // }
 
   return (
-    <Container className="d-flex flex-column align-items-center">
+    <Container
+      className="d-flex flex-column align-items-center"
+      style={{
+        minHeight: '100vh',
+        padding: '20px',
+        background: '#f9f9f9', // Светлый фон
+      }}
+    >
       <Select categories={categories} onSelect={setCategoryId} className="mb-4" />
-      <Row xs={1} md={2} lg={3} xl={4} className="g-4">
+      <Row className="g-4">
         {filteredHotels.map((item) => (
           <Col key={item.id}>
-            <ItemsCard item={item} />
-            <button onClick={()=>deleteHandler(item.id)}>X</button>
-            <UpdateAdvert item={item} categories={categories} onUpdate={handleAdvertUpdate} />
+            <div
+              style={{
+                width: '300px',
+                maxWidth: '300px',
+                height: 'auto',
+                borderRadius: '10px',
+                position: 'relative',
+              }}
+            >
+              <ItemsCard item={item} />
+              <button
+                style={{
+                  position: 'absolute',
+                  top: '10px',
+                  right: '10px',
+                  padding: '5px 10px',
+                  fontSize: '0.9rem',
+                  borderRadius: '20%',
+                }}
+                onClick={() => deleteHandler(item.id)}
+              >
+                X
+              </button>
+              <UpdateAdvert
+                item={item}
+                categories={categories}
+                onUpdate={handleAdvertUpdate}
+              />
+            </div>
           </Col>
         ))}
       </Row>
+
       <CreateAdvert hotels={hotels} setHotels={setHotels} categories={categories} />
     </Container>
   );

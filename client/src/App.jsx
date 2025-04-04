@@ -21,7 +21,6 @@ import LoadingPage from './components/pages/LoadingPage';
 import { Spinner } from 'react-bootstrap';
 import NotFoundPage from './components/pages/NotFoundPage';
 
-
 function App() {
   const [user, setUser] = useState({ status: 'logging' });
   const navigate = useNavigate();
@@ -77,7 +76,7 @@ function App() {
       }
       navigate(`/categories/card/${response.data.id}`)
     } catch (error) {
-      console.error('Ошибка при отправке данных:', error)
+      console.error('Ошибка при отправке данных:', error);
     }
   };
 
@@ -99,7 +98,6 @@ function App() {
       <Route element={<Layout user={user} logoutHandler={logoutHandler} searchHandler={searchHandler}/>}>
 
         <Route path="/" element={<CategoryUserPage user={user} />}/>
-
 
         <Route
           path="/signup"
@@ -149,7 +147,6 @@ function App() {
           />
 
         <Route path="/categories/card/:id" element={<OneCardPage user={user} />} />
-
       </Route>
       <Route path='*' element={<NotFoundPage/>}/>
     </Routes>

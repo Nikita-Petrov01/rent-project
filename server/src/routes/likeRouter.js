@@ -1,11 +1,21 @@
 const express = require('express');
 const likeRouter = express.Router();
 const { Like } = require('../../db/models');
+const { Advertisement } = require('../../db/models');
 
-likeRouter.get('/', async (req, res) => {
+
+likeRouter.get('/:userId', async (req, res) => {
     try {
-        const likes = await Like.findAll();
-        res.status(200).json(likes);
+        const {userId} = req.params
+        const likes = await Like.findAll(
+          {where: {userId}, 
+          include: { 
+            model: Advertisement, 
+          }
+        });
+
+
+        res.status(200).json(likes.map(like => like.advertisement))
     } catch (error) {
         console.log(error);
         res.status(500).send(error);
@@ -14,7 +24,17 @@ likeRouter.get('/', async (req, res) => {
 
 likeRouter.post('/', async (req, res) => {
     try {
-        const like = await Like.create(req.body);
+        const {userId, advertisementId} = req.body
+
+        const existingLike = await Like.findOne({
+          where: {userId, advertisementId}
+        });
+
+        if(existingLike) {
+          return res.status(400).json({message: 'Лайк уже существует'});
+        }
+
+        const like = await Like.create ({userId, advertisementId});
         res.status(201).json(like);
     } catch (error) {
         console.log(error);
@@ -22,9 +42,53 @@ likeRouter.post('/', async (req, res) => {
     }
 })
 
+likeRouter.delete('/:userId/:advertisementId', async (req, res) => {
+  try {
+    const {userId, advertisementId} = req.params;
+    const deleteLike = await Like.destroy({where: {userId, advertisementId}});
+
+    if(deleteLike === 0) {
+      return res.status(404).send('Лайк не найден')
+    }
+    res.status(200).json({
+      success: true,
+      message: 'Лайк удален'
+    })
+  } catch (error) {
+    res.status(500).json({ 
+      message: 'Ошибка при удалении лайка',
+      error: error.message 
+    });
+  }
+})
+
+likeRouter.get('/check/:userId/:advertisementId', async (req, res) => {
+  try {
+    const {userId, advertisementId} = req.params;
+    const like = await Like.findOne({
+      where: {userId, advertisementId}
+    }) 
+
+    res.status(200).json({
+      isLiked: !!like,
+      likeId: like?.id
+    })
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ 
+      message: 'Ошибка при проверке лайка',
+      error: error.message 
+    });
+  }
+})
+
+
+likeRouter.get('/')
+
+
 module.exports = likeRouter
 
-// // Добавляем middleware для проверки аутентификации
+// Добавляем middleware для проверки аутентификации
 // likeRouter.post('/:advertisementId', async (req, res) => {
 //   try {
 //     if (!req.user) {
