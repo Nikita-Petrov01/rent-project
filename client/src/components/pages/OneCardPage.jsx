@@ -114,13 +114,13 @@ function OneCardPage({user, gigaCard}) {
                 alignItems: 'center',
                 gap: '8px',
                 transition: 'all 0.3s ease',
-                boxShadow: like ? '0 4px 6px rgba(255, 71, 87, 0.3)' : 'none',
+                boxShadow: isLiked ? '0 4px 6px rgba(255, 71, 87, 0.3)' : 'none',
               }}
               onMouseOver={(e) => {
-                if (!like) e.target.style.background = '#f1f1f1';
+                if (!isLiked) e.target.style.background = '#f1f1f1';
               }}
               onMouseOut={(e) => {
-                if (!like) e.target.style.background = 'white';
+                if (!isLiked) e.target.style.background = 'white';
               }}
             >
               {isLiked ? '★ В избранном' : '☆ Сохранить'}
