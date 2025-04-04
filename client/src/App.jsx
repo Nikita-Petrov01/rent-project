@@ -75,9 +75,10 @@ function App() {
 
   return (
     <Routes>
-      <Route element={<Layout user={user} logoutHandler={logoutHandler} />}>
-        <Route path="/" element={<CategoryUserPage user={user} />} />
-        <Route path="/categories" element={<CategoryUserPage />}></Route>
+      <Route element={<Layout user={user} logoutHandler={logoutHandler} searchHandler={searchHandler}/>}>
+
+        <Route path="/" element={<CategoryUserPage user={user} />}/>
+      <Route path="/categories" element={<CategoryUserPage />}></Route>
         <Route
           path="/"
           element={
@@ -133,8 +134,6 @@ function App() {
             </ProtectedRouter>
           }
         />
-
-        <Route path="/categories/card/:id" element={<OneCardPage />} />
 
         <Route path="/categories/card/:id" element={<OneCardPage user={user} />} />
       </Route>
