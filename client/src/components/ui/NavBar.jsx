@@ -1,7 +1,10 @@
 import { Button, Container, Form, FormControl, Nav, Navbar } from 'react-bootstrap';
-import { Link } from 'react-router';
+import { Link, useLocation, useParams } from 'react-router';
 
 export default function NavBar({ logoutHandler, user, searchHandler }) {
+  const {id} = useParams()
+  const location = useLocation();
+  const searchRoutes = ['/', '/admin', `/categories/card/${id}`]
   return (
     <Navbar
       style={{
@@ -28,6 +31,7 @@ export default function NavBar({ logoutHandler, user, searchHandler }) {
         </Navbar.Brand>
      
 
+        {searchRoutes.includes(location.pathname) && (
         <Form onSubmit={searchHandler} className="d-flex" style={{ width: '40%' }}>
           <FormControl
             type="search"
@@ -66,13 +70,14 @@ export default function NavBar({ logoutHandler, user, searchHandler }) {
             </svg>
           </Button>
         </Form>
+        )}
 
         <Nav className="d-flex align-items-center gap-4">
-          {user.status === 'logged' && (
             <>
-              <Link
-                to={'/'}
-                style={{
+          {user.status === 'logged' && user.data?.role !== 'admin' ? (
+            <Link
+            to={'/'}
+            style={{
                   color: '#2c3e50', // Темный текст
                   textDecoration: 'none',
                   fontSize: '1rem',
@@ -88,11 +93,36 @@ export default function NavBar({ logoutHandler, user, searchHandler }) {
                   e.target.style.color = '#2c3e50'; // Возврат к исходному цвету
                   e.target.style.textShadow = 'none'; // Убираем подсветку
                 }}
-              >
+            >
                 Главная
               </Link>
+              ) : (
+                <Link
+            to={'/admin'}
+            style={{
+                  color: '#2c3e50', // Темный текст
+                  textDecoration: 'none',
+                  fontSize: '1rem',
+                  fontWeight: 'bold', // Более жирный текст
+                  padding: '5px 10px',
+                  transition: 'color 0.3s ease, text-shadow 0.3s ease',
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.color = 'grey'; // Синий акцент при наведении
+                  e.target.style.textShadow = '0 0 5px rgba(96, 101, 104, 0.8)'; // Легкая подсветка
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.color = '#2c3e50'; // Возврат к исходному цвету
+                  e.target.style.textShadow = 'none'; // Убираем подсветку
+                }}
+            >
+                Главная
+              </Link>
+              )}
 
-              <Link
+              {user.status === 'logged' && user.data?.role !== 'admin' && (
+
+                <Link
                 to="/favorites"
                 style={{
                   color: '#2c3e50', // Темный текст
@@ -113,10 +143,12 @@ export default function NavBar({ logoutHandler, user, searchHandler }) {
               >
                 {user.status === 'logged' ? `${user?.data?.name}` : 'Гость'}
               </Link>
-
-              <Button
-  onClick={() => logoutHandler()}
-  style={{
+              )}
+              
+              {user.status === 'logged' && (
+                <Button
+                onClick={() => logoutHandler()}
+                style={{
     background: '#e74c3c', // Красный акцент
     border: 'none',
     color: '#fff',
@@ -135,11 +167,12 @@ export default function NavBar({ logoutHandler, user, searchHandler }) {
     e.target.style.background = '#e74c3c'; // Возврат к исходному цвету
     e.target.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)'; // Возврат тени
   }}
->
-  Выход
-</Button>
+                >
+                Выход
+              </Button>
+              )}
             </>
-          )}
+          
           {user.status === 'guest' && (
             <div className="d-flex gap-4 align-items-center">
               <Link

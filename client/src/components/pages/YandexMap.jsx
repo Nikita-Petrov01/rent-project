@@ -57,9 +57,6 @@ const YandexMapWithMarkers = () => {
     setHoveredMarker(marker);
   };
 
-  if (isLoading) {
-    return <div>Loading map...</div>;
-  }
 
   return (
     <div style={{ width: '100%', height: '80vh', position: 'relative' }}>

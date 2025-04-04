@@ -4,7 +4,6 @@ import axiosInstance from '../../API/axiosInstance';
 import { Spinner } from 'react-bootstrap';
 import AuthModal from '../ui/AuthModal';
 
-
 function OneCardPage({user, gigaCard}) {
   const { id } = useParams();
   const [advertisement, setAdvertisement] = useState(null);
@@ -53,6 +52,7 @@ function OneCardPage({user, gigaCard}) {
     } catch (error) {
       console.error('Ошибка при изменении лайка:', error);
     }
+
   }
   
   if (loading) {
