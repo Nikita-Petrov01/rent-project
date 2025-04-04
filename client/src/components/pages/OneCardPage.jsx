@@ -6,12 +6,10 @@ function OneCardPage({user}) {
   const { id } = useParams();
   const [advertisement, setAdvertisement] = useState();
   const [isFavorite, setIsFavorite] = useState(false);
-
+  const [like, setLike] = useState(false);
+  console.log(user)
   // Проверяем, есть ли объявление в избранном при загрузке
   useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    setIsFavorite(favorites.some(fav => fav.id === id));
-    
     axiosInstance
       .get(`/advertisements/${id}`)
       .then((response) => setAdvertisement(response.data))
@@ -19,25 +17,37 @@ function OneCardPage({user}) {
   }, [id]);
 
 
-  const toggleFavorite = () => {
-    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+  const likeHandler = () => {
+    const favorites = {userId: user.data.id, advertisementId: Number(id)}
+      axiosInstance.post(`/likes`, favorites)
+      .then(() => {
+        setLike(true)
+      })
+      .catch((error) => console.log(error));
+  }
     
-    if (isFavorite) {
-      const updatedFavorites = favorites.filter(fav => fav.id !== id);
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-    } else {
-      const newFavorite = {
-        id,
-        title: advertisement.title,
-        image: advertisement.image[0],
-        price: advertisement.price,
-        address: advertisement.address
-      };
-      localStorage.setItem('favorites', JSON.stringify([...favorites, newFavorite]));
-    }
+
+
+  // const toggleFavorite = () => {
+  //   const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     
-    setIsFavorite(!isFavorite);
-  };
+  //   if (isFavorite) {
+  //     const updatedFavorites = favorites.filter(fav => fav.id !== id);
+  //     localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  //   } else {
+  //     const newFavorite = {
+  //       id,
+  //       title: advertisement.title,
+  //       image: advertisement.image[0],
+  //       price: advertisement.price,
+  //       address: advertisement.address
+  //     };
+  //     localStorage.setItem('favorites', JSON.stringify([...favorites, newFavorite]));
+  //   }
+    
+  //   setIsFavorite(!isFavorite);
+  // };
 
   return (
     <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
@@ -46,20 +56,20 @@ function OneCardPage({user}) {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h2>{advertisement.title}</h2>
             <button
-              onClick={toggleFavorite}
+              onClick={likeHandler}
               style={{
                 background: 'white',
-                border: `1px solid ${isFavorite ? '#ff4757' : '#ddd'}`,
+                border: `1px solid ${like ? '#ff4757' : '#ddd'}`,
                 padding: '8px 16px',
                 borderRadius: '4px',
                 cursor: 'pointer',
-                color: isFavorite ? '#ff4757' : '#333',
+                color: like ? '#ff4757' : '#333',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px'
               }}
             >
-              {isFavorite ? '★ В избранном' : '☆ Сохранить'}
+              {like ? '★ В избранном' : '☆ Сохранить'}
             </button>
           </div>
 
