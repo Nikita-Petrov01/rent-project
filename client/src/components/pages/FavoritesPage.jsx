@@ -44,7 +44,7 @@ function FavoritesPage({user}) {
           {favorites.map(item => (
             <div key={item.id} style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '15px' }}>
               <img
-                src={item.image}
+                src={item.image[0]}
                 alt={item.title}
                 style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '4px' }}
               />

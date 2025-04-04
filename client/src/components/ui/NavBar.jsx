@@ -18,16 +18,7 @@ export default function NavBar({ logoutHandler, user, searchHandler }) {
     >
       <Container className="d-flex justify-content-between">
         <Navbar.Brand >
-          <img
-            src="https://cdn1.iconfinder.com/data/icons/real-estate-set-1/512/37-1024.png"
-            alt="Логотип"
-            style={{
-              width: '40px',
-              height: '40px',
-              borderRadius: '8px', // Квадрат с закругленными углами
-              objectFit: 'cover',
-            }}
-          />
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEw0lEQVR4nO2ae4hVVRTGfzNOjabZDdPG0EoqU8vIEukF+aDQIhJB05TsD6lAkySKHqbFEJUTYQo+sCIfRUUlUaZpWL6ixNQpRMaxMhIySy0ba8bHPbGG78Bmc84d595z75wJP9hwzz777L3Wfqy91rcu5I9hwLtAA1APPA30oJ2gErgPqAWCiNIILAOuIKW4HJgDHHKE3gc8BVwKjAQ+Ak7p3XFgaVoUqgTGAuuArKPAZtVXxCi8WIoEUuw91ZcUFwFjgCXAYUf4P4EFwDWn2c8lnkJNwHzggmIKvylmvwd6Nxk4J8+++wBvACfU30FgECVQ5ACwHng84f09QP3aGLuAs0kZxmgi/gGOAZ8BDwIXRrTtBNRJmSdJEcZ6RsAtJ4HVwAQZDffuyUpps3apQK2Eng500UG+H1jlHPJA7bo6361Q/cekBA0S6NyId6bUNGCv2nwIlOldFXBE9aNJAb6WMMt0mMuB851ylqzWH2o3y/l2mup+KsAiJoabtNfjTPcp+WAb9Zx1VqADsF311aQAA+SKHJTgh1WaYpQ7Clylb2/QN41tcfO3Bh2BwcBcKRAqs0dbz/Ca6t4hAawDfgN2yo2wmUoadq+86Zjr1dpevfVsh79gbI3YAqt0UJPGMGd1bIwX9PuYrFnB6A5cBzzruOo24MOyRkliYcz52ZHwOM379y1ngG90i/fUdugG9AVuAx4CXgY+lfvRoNmtV90cBWLXAxngMucitYvxVeBeZ6yiYBywP4d5LbRMcsYqqiLosjIncK2UOinz+oPuBzvAz2hWh2i1MlqBcZ6lOiKjEtZNpISKFApfQHNTxkvxshztUodQwMkxoXGF3qVekU0REWeILTnepQ7hjNdFzHr4XJdjxVKJOEXaHYIziqQMZ1YkbfjfrUiVSrtVZEeE42hxe5shA8wQp1sDjPJIuDhUecps94Ipo1HvUr/bxL78qN82zggxM4lgoIgGf2bNI35dg5XnQWC8FNNv4JVfgefF9ueFnmI/NqhDc+GnKHAKaR03AWQcVq+IkMDSFlfLhX8F+M779ltFpX01IV0VHlSL/Happk+AO0934joqT+hzvFOB85x2VypMDpnFQLFLreKYOHoo0EosFOPSEm5RZNnoTZzJkxOL1LhR4aur0L+iQu9x2EKLMR6NEdjC4F+A75XFstTFrQqfW4tuGid0Ri3/khN/qWF/PfdQxLjeyReGQr4N3A18obr3JWivIuZDyjTG8JYa/i6h+sScG2Piv4pJL9is5YPyYrj0SyXUIZlc91y4MCvymA5rqMhcpdnivjF0FrNih3YmsAb4W0YgUXR3SOhAgyxqISk60suPtLZkgZUUaR/a3v/c20IbRSRE7f9rlRmud85ZVDEO7GfgS3FcE2LSdonDEqQven8cOKC6vC+ptkRn4AER34FjAj8Abk+IZu2iZGuN3Ba7ax4pZgriZlGsTd4lNRu4uJV9VQB36NILU3t+CW/1fkXSp/mOeULnwh10jbjjyhxn0LJf8zwmMqu/i8wSoTddzObRUtFHJthQYLny765juUTkd0YXWY0Ouzvju/SXqbi0RkbukHndJUNGfpB7v0SVfVJqUCmFyxe2p5+TgbCV2i0P+EaPB84L/wGJoQi5i/rM3AAAAABJRU5ErkJggg==" alt="key-exchange"/>
         </Navbar.Brand>
      
 

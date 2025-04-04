@@ -3,24 +3,25 @@ const likeRouter = express.Router();
 const { Like } = require('../../db/models');
 const { Advertisement } = require('../../db/models');
 
-
 likeRouter.get('/:userId', async (req, res) => {
-    try {
-        const {userId} = req.params
-        const likes = await Like.findAll(
-          {where: {userId}, 
-          include: { 
-            model: Advertisement, 
-          }
-        });
+  try {
+      const {userId} = req.params
+      const likes = await Like.findAll({
+        where: { userId }, 
+        include: [Advertisement] 
+    });
 
+    const advert = likes.map(like => like.Advertisement);
 
-        res.status(200).json(likes.map(like => like.advertisement))
-    } catch (error) {
-        console.log(error);
-        res.status(500).send(error);
-    }
+    res.status(200).json(advert);
+    
+      
+  } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
+  }
 })
+
 
 likeRouter.post('/', async (req, res) => {
     try {

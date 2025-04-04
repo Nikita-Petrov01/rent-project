@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 const authRouter = require('./routes/authRouter');
 const tokensRouter = require('./routes/tokensRouter');
+const path = require('path')
 
 const addressRouter = require('./routes/addressRouter');
 
@@ -31,7 +32,10 @@ app.use('/api/giga', gigaRouter);
 
 app.use('/api/likes', likeRouter);
 
-
+app.use(express.static.static(path.join(__dirname, '..', 'dist')));
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
+})
 
 
 module.exports = app;
