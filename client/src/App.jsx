@@ -109,7 +109,7 @@ function App() {
           path="/favorites"
           element={
             // <ProtectedRouter isAllowed={user.status === 'guest'} redirectTo="/admin">
-            <FavoritesPage />
+            <FavoritesPage user={user} />
             // </ProtectedRouter>
           }
         />

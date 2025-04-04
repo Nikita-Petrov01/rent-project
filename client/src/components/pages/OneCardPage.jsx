@@ -1,50 +1,75 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axiosInstance from '../../API/axiosInstance';
+import { Spinner } from 'react-bootstrap';
+import AuthModal from '../ui/AuthModal';
 
-function OneCardPage({ user }) {
+
+function OneCardPage({user, gigaCard}) {
   const { id } = useParams();
-  const [advertisement, setAdvertisement] = useState();
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [like, setLike] = useState(false);
-  console.log(user);
-  // Проверяем, есть ли объявление в избранном при загрузке
+  const [advertisement, setAdvertisement] = useState(null);
+  const [isLiked, setIsLiked] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [loading, setLoading] = useState(true)
+
+
+
   useEffect(() => {
-    axiosInstance
-      .get(`/advertisements/${id}`)
-      .then((response) => setAdvertisement(response.data))
-      .catch((error) => console.log(error));
-  }, [id]);
+    const loadData = async () => {
+      try {
+        const advResponse = await axiosInstance.get(`/advertisements/${id}`);
+        setAdvertisement(advResponse.data);
 
-  const likeHandler = () => {
-    const favorites = { userId: user.data.id, advertisementId: Number(id) };
-    axiosInstance
-      .post(`/likes`, favorites)
-      .then(() => {
-        setLike(true);
-      })
-      .catch((error) => console.log(error));
-  };
+        if(user?.data?.id) {
+          const likeResponse = await axiosInstance.get(`/likes/check/${user.data.id}/${id}`)
+          setIsLiked(likeResponse.data.isLiked);
+        }
+      } catch (error) {
+        console.error('Ошибка загрузки:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, [id, user]);
 
-  // const toggleFavorite = () => {
-  //   const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-  //   if (isFavorite) {
-  //     const updatedFavorites = favorites.filter(fav => fav.id !== id);
-  //     localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-  //   } else {
-  //     const newFavorite = {
-  //       id,
-  //       title: advertisement.title,
-  //       image: advertisement.image[0],
-  //       price: advertisement.price,
-  //       address: advertisement.address
-  //     };
-  //     localStorage.setItem('favorites', JSON.stringify([...favorites, newFavorite]));
-  //   }
+  const handleLike = async () => {
+    if (!user?.data?.id) {
+      setShowAuthModal(true);
+      return;
+    }
 
-  //   setIsFavorite(!isFavorite);
-  // };
+    try {
+      if (isLiked) {
+        await axiosInstance.delete(`/likes/${user.data.id}/${id}`);
+      } else {
+        await axiosInstance.post('/likes', {
+          userId: user.data.id,
+          advertisementId: Number(id),
+        });
+      }
+      setIsLiked(!isLiked);
+    } catch (error) {
+      console.error('Ошибка при изменении лайка:', error);
+    }
+  }
+  
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center min-vh-100 text-center">
+      <div>
+        <Spinner animation="border" variant="primary" />
+        <h3 className="mt-3">Загрузка...</h3>
+      </div>
+    </div>
+    )
+  }
+
+  if(!advertisement) {
+    return <div>Объявление не найдено</div>
+  }
+
 
   return (
     <div
@@ -73,14 +98,18 @@ function OneCardPage({ user }) {
               {advertisement.title}
             </h2>
             <button
-              onClick={likeHandler}
+              onClick={handleLike}
               style={{
-                background: like ? '#ff4757' : 'white',
-                border: `1px solid ${like ? '#ff4757' : '#ddd'}`,
+
+                background: 'white',
+                border: `1px solid ${isLiked ? '#ff4757' : '#ddd'}`,
+
                 padding: '8px 16px',
                 borderRadius: '20px',
                 cursor: 'pointer',
-                color: like ? 'white' : '#333',
+
+                color: isLiked ? '#ff4757' : '#333',
+
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
@@ -94,7 +123,7 @@ function OneCardPage({ user }) {
                 if (!like) e.target.style.background = 'white';
               }}
             >
-              {like ? '★ В избранном' : '☆ Сохранить'}
+              {isLiked ? '★ В избранном' : '☆ Сохранить'}
             </button>
           </div>
 
@@ -202,6 +231,10 @@ function OneCardPage({ user }) {
           </Link>
         </>
       )}
+      <AuthModal
+        show={showAuthModal}
+        onClose={() => setShowAuthModal}
+      />
     </div>
   );
 }
