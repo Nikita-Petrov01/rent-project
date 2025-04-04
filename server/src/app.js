@@ -32,7 +32,7 @@ app.use('/api/giga', gigaRouter);
 
 app.use('/api/likes', likeRouter);
 
-app.use(express.static.static(path.join(__dirname, '..', 'dist')));
+app.use(express.static(path.join(__dirname, '..', 'dist')));
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
 })
