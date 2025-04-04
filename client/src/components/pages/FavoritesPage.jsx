@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axiosInstance from '../../API/axiosInstance';
 
-function FavoritesPage() {
-  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+function FavoritesPage({user}) {
 
-  const removeFavorite = (id) => {
-    const updatedFavorites = favorites.filter(fav => fav.id !== id);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-    window.location.reload(); // Простое обновление для отображения изменений
+  const [favorites, setFavorites] = useState([]);
+
+
+  useEffect(() => {
+    const loadFavorites = async () => {
+      if (!user?.data?.id) return;
+      try {
+        const response = await axiosInstance.get(`/likes/${user.data.id}`);
+        console.log(response.data)
+        setFavorites(response.data);
+      } catch (error) {
+        console.error('Ошибка загрузки избранного:', error);
+      }
+    };
+    
+    loadFavorites();
+  }, [user]);
+
+
+  const removeFavorite = async (advertisementId) => {
+    try {
+      await axiosInstance.delete(`/likes/${user.data.id}/${advertisementId}`);
+      setFavorites(favorites.filter(fav => fav.advertisementId !== advertisementId));
+    } catch (error) {
+      console.error('Ошибка удаления:', error);
+    }
   };
 
+  
   return (
     <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
       <h2>Мои избранные объявления</h2>
