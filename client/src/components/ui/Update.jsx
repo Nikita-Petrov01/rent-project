@@ -15,8 +15,14 @@ export default function UpdateAdvert({ item, categories, onUpdate }) {
       e.preventDefault();
       const formData = new FormData(e.target);
       const data = Object.fromEntries(formData);
+  
+      // Преобразуем поле image в массив
+      if (data.image) {
+        data.image = data.image.split(',').map((url) => url.trim()); // Разделяем по запятой и убираем пробелы
+      }
+  
       const resp = await axiosInstance.put(`/advertisements/update/${item.id}`, data);
-
+  
       if (onUpdate) {
         onUpdate(resp.data);
       }
@@ -27,7 +33,22 @@ export default function UpdateAdvert({ item, categories, onUpdate }) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" onClick={handleShow}   style={{
+        position: 'absolute',
+        bottom: '12px',
+        right: '12px',
+        padding: '5px 10px',
+        fontSize: '0.9rem',
+        borderRadius: '5px',
+        background: '#2ecc71', // Зеленый фон кнопки
+        color: '#fff', // Белый текст
+        border: 'none',
+        boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)', // Легкая тень
+        cursor: 'pointer',
+        transition: 'background 0.3s ease',
+      }}
+      onMouseOver={(e) => (e.target.style.background = '#27ae60')} // Эффект при наведении
+      onMouseOut={(e) => (e.target.style.background = '#2ecc71')}>
         Изменить
       </Button>
 

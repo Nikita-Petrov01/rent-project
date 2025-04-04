@@ -112,49 +112,89 @@ const YandexMapWithMarkers = () => {
 
       {/* Всплывающая подсказка при наведении */}
       {hoveredMarker && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '10px',
-            right: '10px',
-            backgroundColor: 'white',
-            padding: '10px',
-            borderRadius: '5px',
-            boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
-            zIndex: 1000,
-            maxWidth: '300px',
-            display: 'flex',
-            flexDirection: 'column',
-            minHeight: '200px',
-          }}
-        >
-          <div style={{ alignSelf: 'flex-end', marginBottom: 'auto' }}>
-            <Button
-              variant="danger"
-              onClick={() => setHoveredMarker(null)}
-              style={{ padding: '2px 6px', fontSize: '10px', marginBottom: '5px' }}
-            >
-              X
-            </Button>
-          </div>
-          <img
-            src={hoveredMarker.image[0]}
-            style={{ width: '100%', marginBottom: '10px', borderRadius: '10px' }}
-          />
-          <h3 style={{ margin: '0 0 8px 0' }}>{hoveredMarker.title || 'Метка'}</h3>
-          <p style={{ margin: '0 0 8px 0' }}>{hoveredMarker.address}</p>
-          {hoveredMarker.description && (
-            <p style={{ margin: '0 0 12px 0' }}>{hoveredMarker.description}</p>
-          )}
-          <Button
-            onClick={() => navigate(`../categories/card/${hoveredMarker.id}`)}
-            variant="secondary"
-          >
-            Подробнее
-          </Button>
-        </div>
-      )}
+  <div
+    style={{
+      position: 'absolute',
+      top: '10px',
+      right: '10px',
+      backgroundColor: 'white',
+      padding: '8px', // Уменьшено
+      borderRadius: '15px',
+      boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+      zIndex: 1000,
+      maxWidth: '300px', // Уменьшено
+      maxHeight: '70vh', // Уменьшено
+      overflowY: 'auto',
+      display: 'flex',
+      flexDirection: 'column',
+    }}
+  >
+    <div style={{ alignSelf: 'flex-end', marginBottom: 'auto' }}>
+      <Button
+        variant="danger"
+        onClick={() => setHoveredMarker(null)}
+        style={{
+          padding: '2px 5px', // Уменьшено
+          fontSize: '10px',
+          marginBottom: '5px',
+        }}
+      >
+        X
+      </Button>
     </div>
+    <img
+      src={hoveredMarker.image[0]}
+      style={{
+        width: '100%',
+        height: '120px', // Уменьшено
+        objectFit: 'cover',
+        marginBottom: '8px', // Уменьшено
+        borderRadius: '8px', // Уменьшено
+      }}
+      alt="Метка"
+    />
+    <h3
+      style={{
+        margin: '0 0 6px 0', // Уменьшено
+        fontSize: '1rem', // Уменьшено
+        fontWeight: 'bold',
+        color: '#2c3e50',
+      }}
+    >
+      {hoveredMarker.title || 'Метка'}
+    </h3>
+    <p
+      style={{
+        margin: '0 0 6px 0', // Уменьшено
+        fontSize: '0.9rem', // Уменьшено
+        color: 'black',
+      }}
+    >
+      {hoveredMarker.address}
+    </p>
+    {hoveredMarker.description && (
+      <p
+        style={{
+          margin: '0 0 10px 0', // Уменьшено
+          fontSize: '0.85rem', // Уменьшено
+          color: '#7f8c8d',
+        }}
+      >
+        {hoveredMarker.description}
+      </p>
+    )}
+    <Button
+      onClick={() => navigate(`../categories/card/${hoveredMarker.id}`)}
+      variant="secondary"
+      style={{
+        fontSize: '0.9rem', // Уменьшено
+        padding: '6px 10px', // Уменьшено
+      }}
+    >
+      Подробнее
+    </Button>
+  </div>
+)}    </div>
   );
 };
 
